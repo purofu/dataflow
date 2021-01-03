@@ -119,26 +119,105 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"index.js":[function(require,module,exports) {
 var climate_daly_data = [{
-  region: "Low-and-middle-income countries of the African Region",
-  deaths: 57
+  orient: "left",
+  name: "1956",
+  x: 368,
+  y: 238
 }, {
-  region: "Low-and-middle-income countries of the Americas",
-  deaths: 2
+  orient: "right",
+  name: "1957",
+  x: 372,
+  y: 240
 }, {
-  region: "Low-and-middle-income countries of the Eastern Mediterranean Region",
-  deaths: 20
+  orient: "bottom",
+  name: "1958",
+  x: 377,
+  y: 225
 }, {
-  region: "Low-and-middle-income countries of the European Region",
-  deaths: 0.67
+  orient: "top",
+  name: "1959",
+  x: 391,
+  y: 230
 }, {
-  region: "Low-and-middle-income countries of the South-East Asia Region",
-  deaths: 58
+  orient: "right",
+  name: "1960",
+  x: 394,
+  y: 226
 }, {
-  region: "Low-and-middle-income countries of the Western Pacific Region",
-  deaths: 4
+  orient: "bottom",
+  name: "1961",
+  x: 398,
+  y: 225
 }, {
-  region: "High income countries",
-  deaths: 0.23
+  orient: "right",
+  name: "1962",
+  x: 408,
+  y: 221
+}, {
+  orient: "bottom",
+  name: "1963",
+  x: 423,
+  y: 212
+}, {
+  orient: "bottom",
+  name: "1964",
+  x: 438,
+  y: 210
+}, {
+  orient: "bottom",
+  name: "1965",
+  x: 454,
+  y: 213
+}, {
+  orient: "top",
+  name: "1966",
+  x: 468,
+  y: 214
+}, {
+  orient: "bottom",
+  name: "1967",
+  x: 483,
+  y: 240
+}, {
+  orient: "right",
+  name: "1968",
+  x: 504,
+  y: 212
+}, {
+  orient: "right",
+  name: "1969",
+  x: 521,
+  y: 207
+}, {
+  orient: "right",
+  name: "1970",
+  x: 538,
+  y: 201
+}, {
+  orient: "bottom",
+  name: "1971",
+  x: 565,
+  y: 193
+}, {
+  orient: "bottom",
+  name: "1972",
+  x: 597,
+  y: 187
+}, {
+  orient: "right",
+  name: "1973",
+  x: 616,
+  y: 190
+}, {
+  orient: "left",
+  name: "1974",
+  x: 594,
+  y: 234
+}, {
+  orient: "bottom",
+  name: "1975",
+  x: 611,
+  y: 230
 }];
 
 var toggleClass = function toggleClass(i, toggle) {
@@ -147,12 +226,29 @@ var toggleClass = function toggleClass(i, toggle) {
 };
 
 var divSelection = d3.select("#viz").selectAll("div");
-divSelection.data(climate_daly_data).enter().append("div").attr("class", "bar").style("width", function (d) {
-  return d.deaths * 8 + "px";
+divSelection.data(climate_daly_data).enter().append("div").attr("class", "bar").style("position", 'absolute').style("top", function (d) {
+  return d.x * 8 + "px";
+  return console.log(d.y);
+}).style("left", function (d) {
+  return d.y * 8 + "px";
 }).on("mouseover", function (d, i) {
   toggleClass(i + 1, true);
 }).on("mouseout", function (d, i) {
   toggleClass(i + 1, false);
+});
+var data = [5, 10, 12];
+var width = 900,
+    scaleFactor = 10,
+    barHeight = 20;
+var graph = d3.select("body").append("svg").attr("width", width).attr("height", 1000);
+var bar = graph.selectAll("g").data(climate_daly_data).enter().append("g").attr("transform", function (d, i) {
+  return "translate(" + d.x + "," + d.y + ")";
+});
+bar.append("rect").attr("width", 20).attr("height", 20);
+bar.append("text").attr("x", function (d) {
+  return d.y * scaleFactor;
+}).attr("y", barHeight / 2).attr("dy", ".35em").text(function (d) {
+  return d;
 });
 var listSelection = d3.select("#legend").selectAll("li");
 listSelection.data(climate_daly_data).enter().append("li").text(function (d) {
@@ -190,7 +286,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51139" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57637" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

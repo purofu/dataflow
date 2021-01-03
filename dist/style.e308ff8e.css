@@ -28,4 +28,14 @@ li{
   background-color: #0769ad;
 }
 
+svg rect {
+  fill: orange;
+}
+
+svg text {
+  fill:white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
 /*# sourceMappingURL=/style.e308ff8e.css.map */
